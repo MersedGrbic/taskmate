@@ -18,7 +18,7 @@ const Sidebar = () => {
   const setWideNavBar = () => {
     setWideSideBar((prevState) => !prevState);
   };
-  console.log(wideSideBar);
+
   const menuItem = [
     {
       path: "/",

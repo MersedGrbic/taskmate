@@ -1,14 +1,16 @@
 import React from "react";
 import axios from "axios";
 import plusSvg from "../images/plus_icon.svg";
-import vectorTwo from "../images/vector_two.png";
 import "animate.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import trashcanSvg from "../images/trashcan.svg";
 import editSvg from "../images/edit.svg";
 import RenderForm from "../components/RenderForm";
 import EmptyList from "../components/EmptyList";
+
+// Custom hook to manage the my list page
 const MyList = () => {
+  // State to manage the list
   const [newList, setNewList] = React.useState(false);
   const { user } = useAuth0();
   const [data, setData] = React.useState([]);
@@ -20,6 +22,8 @@ const MyList = () => {
   });
   const [isUpdating, setIsUpdating] = React.useState("");
   const PORT = 3500;
+
+  // Fetch the list data when the component renders
   React.useEffect(() => {
     axios
       .get(`http://localhost:${PORT}/api/items/${user.email}`)
@@ -27,9 +31,9 @@ const MyList = () => {
         const userData = res.data;
         setData(userData);
       });
-    console.log("render");
   }, [fetchData]);
 
+  // Handle the change of the input fields
   const handleChange = (event) => {
     setCreateList((prevListData) => {
       return {
@@ -39,11 +43,14 @@ const MyList = () => {
     });
   };
 
+  // Delete task from list
   const deleteTask = async (id) => {
     const res = await axios.delete(`http://localhost:${PORT}/api/item/${id}`);
     const newList = data.filter((item) => item._id !== id);
     setData(newList);
   };
+
+  // Cancel the update of task
   const cancelUpdate = () => {
     setIsUpdating("");
     setCreateList({
@@ -52,6 +59,8 @@ const MyList = () => {
       task: "",
     });
   };
+
+  // Update the form with current task value
   const updateTaskForm = (id, name, task) => {
     setIsUpdating(id);
     setCreateList({
@@ -60,6 +69,8 @@ const MyList = () => {
       task: task,
     });
   };
+
+  // Update the task
   const updateTask = async (id) => {
     const res = await axios.put(
       `http://localhost:${PORT}/api/item/${id}`,
@@ -73,6 +84,8 @@ const MyList = () => {
       task: "",
     });
   };
+
+  // Submit the task
   const submitTask = async (e) => {
     e.preventDefault();
     try {
@@ -95,10 +108,12 @@ const MyList = () => {
     }
   };
 
+  // Display the input form
   const displayInput = () => {
     setNewList((prevState) => !prevState);
   };
 
+  // Display the text in the list
   const displayText = () => {
     if (newList) {
       return (
@@ -106,6 +121,7 @@ const MyList = () => {
           handleChange={handleChange}
           displayInput={displayInput}
           submitTask={submitTask}
+          conitnue
         />
       );
     } else {
@@ -117,7 +133,7 @@ const MyList = () => {
             {data.map((el) => {
               if (isUpdating === el._id) {
                 return (
-                  <div className="list">
+                  <div key={el._id} className="list">
                     <div className="list-form">
                       <div className="form__group field">
                         <input
@@ -155,7 +171,7 @@ const MyList = () => {
                 );
               }
               return (
-                <div className="list">
+                <div key={el._id} className="list">
                   <div className="btn-edit-wrapper">
                     <button onClick={() => deleteTask(el._id)}>
                       <img src={trashcanSvg} />

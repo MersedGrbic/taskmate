@@ -1,13 +1,13 @@
 import React from "react";
 import axios from "axios";
 import plusSvg from "../images/plus_icon.svg";
-import logoSvg from "../images/shape.svg";
 import vectorTwo from "../images/vector_two.png";
 import "animate.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import trashcanSvg from "../images/trashcan.svg";
 import editSvg from "../images/edit.svg";
-
+import RenderForm from "../components/RenderForm";
+import EmptyList from "../components/EmptyList";
 const MyList = () => {
   const [newList, setNewList] = React.useState(false);
   const { user } = useAuth0();
@@ -94,65 +94,23 @@ const MyList = () => {
       console.log(error);
     }
   };
-  const emptyList = (
-    <div className="empty-list">
-      <img src={vectorTwo} />
-      <p>
-        Hello there {user.name}! Get started by <br /> creating a to-do list
-      </p>
-    </div>
-  );
+
   const displayInput = () => {
     setNewList((prevState) => !prevState);
   };
-  const renderForm = () => {
-    return (
-      <div className="input-wrapper">
-        <div className="input-logo">
-          <img src={logoSvg} />
-        </div>
-        <h3>Create new list</h3>
-        <div className="form__group field">
-          <input
-            required=""
-            placeholder="Name"
-            class="form__field"
-            type="text"
-            name="name"
-            onChange={handleChange}
-          />
-          <label className="form__label" for="name">
-            New list name
-          </label>
-        </div>
-        <div className="form__group field">
-          <input
-            required=""
-            placeholder="Name"
-            className="form__field"
-            type="text"
-            name="task"
-            onChange={handleChange}
-          />
-          <label className="form__label" for="name">
-            New list description
-          </label>
-        </div>
-        <div className="form_button">
-          <button onClick={displayInput}>Cancel</button>
-          <button className="purple_btn" onClick={submitTask}>
-            Create
-          </button>
-        </div>
-      </div>
-    );
-  };
+
   const displayText = () => {
     if (newList) {
-      return renderForm();
+      return (
+        <RenderForm
+          handleChange={handleChange}
+          displayInput={displayInput}
+          submitTask={submitTask}
+        />
+      );
     } else {
       if (data.length < 1) {
-        return emptyList;
+        return <EmptyList name={user.name} />;
       } else {
         return (
           <div className="list-wrapper">

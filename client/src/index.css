@@ -96,35 +96,35 @@ button.log:hover {
   display: flex;
   color: white;
   padding: 40px 0px 0px 0px;
-  height: 100vh;
+  border: 1 px solid red;
 }
 
 .nav-container {
   max-width: 400px;
   border-right: 1px solid #d9d9d9;
   height: 90vh;
-  padding-left: 48px;
+  position: fixed;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  background-color: #131313;
 }
-.small-sidebar {
-  width: 90px;
-}
+
 .sidebar {
   display: flex;
   flex-direction: column;
   gap: 9px;
-  padding-right: 37px;
 }
 .top-section {
   display: flex;
-
   align-items: center;
-  justify-content: space-between;
-  gap: 5px;
   margin-bottom: 136px;
 }
 .hamburger-button {
+  padding: 0;
   width: 28px;
   height: 28px;
+  margin-left: auto;
 }
 .links {
   display: flex;
@@ -153,6 +153,7 @@ button.log:hover {
 .tasklist {
   width: 100%;
   padding-left: 48px;
+  margin-left: 50px;
 }
 .tasklist .header {
   display: flex;
@@ -203,22 +204,51 @@ button.log:hover {
   padding: 70px 0px 20px 0px;
 }
 .list {
-  border: 2px solid #406fef;
-  width: 320px;
-  height: 270px;
-  padding: 32px 32px;
+  border: 1.5px solid #406fef;
+  width: 300px;
+  height: 200px;
+  padding: 10px 30px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  box-shadow: 5px 5px 4px rgba(64, 111, 239, 0.5);
+  gap: 10px;
+  box-shadow: 2px 2px 5px rgba(64, 111, 239, 0.5);
   border-radius: 12px;
   font-size: 18px;
   line-height: 24px;
+}
+
+.list-form .update-btn {
+  padding-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+.list-form .update-btn button {
+  border-radius: 12px;
+  font-family: "Lato", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  background-color: #d4d4d4ee;
+  padding: 10px 20px;
+}
+.list-form .update-btn button:hover {
+  background-color: #d4d4d4;
+  cursor: pointer;
+}
+.list-form .update-btn .purple_btn {
+  background-color: #6755e0f5;
+  color: #ffffff;
+}
+.list-form .update-btn .purple_btn:hover {
+  background-color: #6855e0;
 }
 .list-title {
   font-weight: 900;
   padding-bottom: 10px;
   border-bottom: 0.5px solid #406fefc4;
+}
+.list-text {
+  font-size: 14px;
 }
 .input-wrapper {
   width: 400px;
@@ -232,6 +262,12 @@ button.log:hover {
   flex-direction: column;
   align-items: center;
   padding: 32px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 .input-logo {

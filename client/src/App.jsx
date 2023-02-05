@@ -1,8 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginButton from "./components/LoginButton";
-import LogoutButton from "./components/LogoutButton";
-import Taskmate from "./components/Taskmate";
 import Sidebar from "./components/Sidebar";
 import About from "./pages/About";
 import Friends from "./pages/Friends";

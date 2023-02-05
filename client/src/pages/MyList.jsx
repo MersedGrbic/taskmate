@@ -105,48 +105,51 @@ const MyList = () => {
   const displayInput = () => {
     setNewList((prevState) => !prevState);
   };
+  const renderForm = () => {
+    return (
+      <div className="input-wrapper">
+        <div className="input-logo">
+          <img src={logoSvg} />
+        </div>
+        <h3>Create new list</h3>
+        <div className="form__group field">
+          <input
+            required=""
+            placeholder="Name"
+            class="form__field"
+            type="text"
+            name="name"
+            onChange={handleChange}
+          />
+          <label className="form__label" for="name">
+            New list name
+          </label>
+        </div>
+        <div className="form__group field">
+          <input
+            required=""
+            placeholder="Name"
+            className="form__field"
+            type="text"
+            name="task"
+            onChange={handleChange}
+          />
+          <label className="form__label" for="name">
+            New list description
+          </label>
+        </div>
+        <div className="form_button">
+          <button onClick={displayInput}>Cancel</button>
+          <button className="purple_btn" onClick={submitTask}>
+            Create
+          </button>
+        </div>
+      </div>
+    );
+  };
   const displayText = () => {
     if (newList) {
-      return (
-        <div className="input-wrapper">
-          <div className="input-logo">
-            <img src={logoSvg} />
-          </div>
-          <h3>Create new list</h3>
-          <div className="form__group field">
-            <input
-              required=""
-              placeholder="Name"
-              class="form__field"
-              type="text"
-              name="name"
-              onChange={handleChange}
-            />
-            <label className="form__label" for="name">
-              New list name
-            </label>
-          </div>
-          <div className="form__group field">
-            <input
-              required=""
-              placeholder="Name"
-              className="form__field"
-              type="text"
-              name="task"
-              onChange={handleChange}
-            />
-            <label className="form__label" for="name">
-              New list description
-            </label>
-          </div>
-          <div className="form_button">
-            <button onClick={displayInput}>Cancel</button>
-            <button className="purple_btn" onClick={submitTask}>
-              Create
-            </button>
-          </div>
-        </div>
-      );
+      return renderForm();
     } else {
       if (data.length < 1) {
         return emptyList;
@@ -157,36 +160,38 @@ const MyList = () => {
               if (isUpdating === el._id) {
                 return (
                   <div className="list">
-                    <div className="form__group field">
-                      <input
-                        required=""
-                        placeholder="Name"
-                        class="form__field"
-                        type="text"
-                        name="name"
-                        onChange={handleChange}
-                        value={createList.name}
-                      />
-                    </div>
-                    <div className="form__group field">
-                      <input
-                        required=""
-                        placeholder="Name"
-                        className="form__field"
-                        type="text"
-                        name="task"
-                        onChange={handleChange}
-                        value={createList.task}
-                      />
-                    </div>
-                    <div className="form_button">
-                      <button onClick={() => cancelUpdate()}>Cancel</button>
-                      <button
-                        className="purple_btn"
-                        onClick={() => updateTask(el._id)}
-                      >
-                        Update
-                      </button>
+                    <div className="list-form">
+                      <div className="form__group field">
+                        <input
+                          required=""
+                          placeholder="Name"
+                          class="form__field"
+                          type="text"
+                          name="name"
+                          onChange={handleChange}
+                          value={createList.name}
+                        />
+                      </div>
+                      <div className="form__group field">
+                        <input
+                          required=""
+                          placeholder="Name"
+                          className="form__field"
+                          type="text"
+                          name="task"
+                          onChange={handleChange}
+                          value={createList.task}
+                        />
+                      </div>
+                      <div className="update-btn">
+                        <button onClick={() => cancelUpdate()}>Cancel</button>
+                        <button
+                          className="purple_btn"
+                          onClick={() => updateTask(el._id)}
+                        >
+                          Update
+                        </button>
+                      </div>
                     </div>
                   </div>
                 );

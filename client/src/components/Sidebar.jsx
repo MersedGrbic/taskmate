@@ -57,7 +57,7 @@ const Sidebar = () => {
     },
   ];
   return (
-    <div className="nav-container" style={{ width: wideSideBar ? "" : "90px" }}>
+    <div className="nav-container" style={{ width: wideSideBar ? "" : "30px" }}>
       <div className="sidebar">
         <div className="top-section">
           {wideSideBar && (

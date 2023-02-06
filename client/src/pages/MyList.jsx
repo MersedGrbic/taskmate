@@ -3,11 +3,10 @@ import axios from "axios";
 import plusSvg from "../images/plus_icon.svg";
 import "animate.css";
 import { useAuth0 } from "@auth0/auth0-react";
-import trashcanSvg from "../images/trashcan.svg";
-import editSvg from "../images/edit.svg";
 import RenderForm from "../components/RenderForm";
 import EmptyList from "../components/EmptyList";
-
+import List from "../components/List";
+import UpdateListForm from "../components/UpdateListForm";
 // Custom hook to manage the my list page
 const MyList = () => {
   // State to manage the list
@@ -96,6 +95,7 @@ const MyList = () => {
       });
 
       setFetchData((prevState) => !prevState);
+
       setCreateList({
         user: user.email,
         name: "",
@@ -133,58 +133,26 @@ const MyList = () => {
             {data.map((el) => {
               if (isUpdating === el._id) {
                 return (
-                  <div key={el._id} className="list">
-                    <div className="list-form">
-                      <div className="form__group field">
-                        <input
-                          required=""
-                          placeholder="Name"
-                          class="form__field"
-                          type="text"
-                          name="name"
-                          onChange={handleChange}
-                          value={createList.name}
-                        />
-                      </div>
-                      <div className="form__group field">
-                        <input
-                          required=""
-                          placeholder="Name"
-                          className="form__field"
-                          type="text"
-                          name="task"
-                          onChange={handleChange}
-                          value={createList.task}
-                        />
-                      </div>
-                      <div className="update-btn">
-                        <button onClick={() => cancelUpdate()}>Cancel</button>
-                        <button
-                          className="purple_btn"
-                          onClick={() => updateTask(el._id)}
-                        >
-                          Update
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                  <UpdateListForm
+                    key={el._id}
+                    handleChange={handleChange}
+                    valueName={createList.name}
+                    valueTask={createList.task}
+                    cancelUpdate={cancelUpdate}
+                    updateTask={updateTask}
+                    id={el._id}
+                  />
                 );
               }
               return (
-                <div key={el._id} className="list">
-                  <div className="btn-edit-wrapper">
-                    <button onClick={() => deleteTask(el._id)}>
-                      <img src={trashcanSvg} />
-                    </button>
-                    <button
-                      onClick={() => updateTaskForm(el._id, el.name, el.task)}
-                    >
-                      <img src={editSvg} />
-                    </button>
-                  </div>
-                  <p className="list-title">{el.name}</p>
-                  <p className="list-text">{el.task}</p>
-                </div>
+                <List
+                  key={el._id}
+                  deleteTask={deleteTask}
+                  updateTaskForm={updateTaskForm}
+                  id={el._id}
+                  name={el.name}
+                  task={el.task}
+                />
               );
             })}
           </div>

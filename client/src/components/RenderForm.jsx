@@ -10,12 +10,12 @@ const RenderForm = (props) => {
         <input
           required=""
           placeholder="Name"
-          class="form__field"
+          className="form__field"
           type="text"
           name="name"
           onChange={props.handleChange}
         />
-        <label className="form__label" for="name">
+        <label className="form__label" htmlFor="name">
           New list name
         </label>
       </div>
@@ -28,7 +28,7 @@ const RenderForm = (props) => {
           name="task"
           onChange={props.handleChange}
         />
-        <label className="form__label" for="name">
+        <label className="form__label" htmlFor="name">
           New list description
         </label>
       </div>

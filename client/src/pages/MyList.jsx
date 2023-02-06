@@ -121,7 +121,6 @@ const MyList = () => {
           handleChange={handleChange}
           displayInput={displayInput}
           submitTask={submitTask}
-          conitnue
         />
       );
     } else {

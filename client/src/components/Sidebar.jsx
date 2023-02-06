@@ -92,7 +92,7 @@ const Sidebar = () => {
                 style={{ width: "28px" }}
                 onClick={() => setActiveLink(index)}
               >
-                <img className="lin-img" src={item.icon} />
+                <img className="link-img" src={item.icon} />
               </NavLink>
             );
           }

@@ -21,15 +21,13 @@ const MyList = () => {
   });
   const [isUpdating, setIsUpdating] = React.useState("");
   const PORT = 3500;
-
+  const HOST = "http://localhost:";
   // Fetch the list data when the component renders
   React.useEffect(() => {
-    axios
-      .get(`http://localhost:${PORT}/api/items/${user.email}`)
-      .then((res) => {
-        const userData = res.data;
-        setData(userData);
-      });
+    axios.get(`${HOST}${PORT}/api/items/${user.email}`).then((res) => {
+      const userData = res.data;
+      setData(userData);
+    });
   }, [fetchData]);
 
   // Handle the change of the input fields
@@ -44,7 +42,7 @@ const MyList = () => {
 
   // Delete task from list
   const deleteTask = async (id) => {
-    const res = await axios.delete(`http://localhost:${PORT}/api/item/${id}`);
+    const res = await axios.delete(`${HOST}${PORT}/api/item/${id}`);
     const newList = data.filter((item) => item._id !== id);
     setData(newList);
   };
@@ -71,10 +69,7 @@ const MyList = () => {
 
   // Update the task
   const updateTask = async (id) => {
-    const res = await axios.put(
-      `http://localhost:${PORT}/api/item/${id}`,
-      createList
-    );
+    const res = await axios.put(`${HOST}${PORT}/api/item/${id}`, createList);
     await setFetchData((prevState) => !prevState);
     setIsUpdating("");
     setCreateList({
@@ -88,7 +83,7 @@ const MyList = () => {
   const submitTask = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`http://localhost:${PORT}/api/item`, {
+      const res = await axios.post(`${HOST}${PORT}/api/item`, {
         user: createList.user,
         name: createList.name,
         task: createList.task,
